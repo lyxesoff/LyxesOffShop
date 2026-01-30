@@ -1,0 +1,26 @@
+/* src/index.css */
+:root {
+  --red: #ff0000;
+  --bg: #000000;
+  --bg-gradient: radial-gradient(circle at center, #150000 0%, #000000 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: white;
+  overflow-x: hidden; /* Чтобы не было горизонтальной прокрутки */
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}

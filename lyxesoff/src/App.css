@@ -1,0 +1,48 @@
+/* src/App.css */
+.app-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  /* Тот самый эффект частиц будет фоном под всем контентом */
+  background: var(--bg-gradient);
+}
+
+/* Если ты всё еще используешь эффект перемещения (slider) */
+.main-container {
+  display: flex;
+  width: 300vw; /* Три страницы в ряд */
+  height: 100vh;
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+  position: relative;
+  z-index: 2;
+}
+
+/* Стили для каждой секции-страницы */
+section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+/* Глобальный стиль для оверлеев (модалок), если они в App.jsx */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.96);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay.active {
+  display: flex;
+}

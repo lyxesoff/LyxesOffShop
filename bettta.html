@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LyxesOFF | Premium Private Software</title>
+    <link rel="icon" type="image/png" href="./Logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --red: #ff0000; --bg: #000000; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; overflow-x: hidden; }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: 1; background: radial-gradient(circle at center, #150000 0%, #000000 100%); }
+
+        /* НАВИГАЦИЯ */
+        nav { 
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 4%; position: fixed; width: 100%; top: 0; z-index: 1000; 
+            background: rgba(0,0,0,0.95); border-bottom: 2px solid rgba(255,0,0,0.3); backdrop-filter: blur(15px); 
+        }
+        .logo { font-weight: 900; letter-spacing: 2px; font-size: 38px; cursor: pointer; text-transform: uppercase; }
+        .logo span { color: var(--red); }
+        
+        .nav-right { display: flex; gap: 40px; align-items: center; }
+        .nav-links a { color: #eee; text-decoration: none; font-size: 18px; cursor: pointer; text-transform: uppercase; font-weight: 800; margin-left: 25px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--red); }
+        .social-icons a { color: white; font-size: 24px; margin-left: 15px; transition: 0.3s; }
+        .social-icons a:hover { color: var(--red); }
+
+        /* КОНТЕНТ */
+        .main-container { display: flex; width: 300vw; height: 100vh; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); position: relative; z-index: 2; }
+        section { width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px; }
+
+        .hero-title { font-size: clamp(40px, 8vw, 120px); font-weight: 900; letter-spacing: 5px; text-transform: uppercase; white-space: nowrap; margin: 0; }
+        .hero-title span { color: var(--red); text-shadow: 0 0 50px rgba(255,0,0,0.5); }
+
+        .top-info { display: flex; gap: 20px; margin-bottom: 30px; }
+        .info-badge { background: rgba(30, 0, 0, 0.6); border: 2px solid var(--red); padding: 12px 35px; border-radius: 50px; font-size: 18px; font-weight: 900; }
+
+        .btn-group { display: flex; gap: 25px; margin-top: 40px; }
+        .btn-main { background: var(--red); color: white; border: none; padding: 22px 65px; border-radius: 12px; font-weight: 900; font-size: 22px; cursor: pointer; text-transform: uppercase; transition: 0.4s; }
+        .btn-outline { background: transparent; border: 3px solid #444; color: white; padding: 22px 65px; border-radius: 12px; font-weight: 900; font-size: 22px; cursor: pointer; text-transform: uppercase; transition: 0.4s; }
+        .btn-main:disabled { background: #333 !important; cursor: not-allowed; opacity: 0.5; box-shadow: none !important; transform: none !important; }
+        .btn-main:hover:not(:disabled) { transform: scale(1.05); box-shadow: 0 0 30px var(--red); }
+
+        /* МАГАЗИН */
+        .product-card { 
+            background: rgba(15,15,15,0.9); border: 2px solid #222; 
+            padding: 70px 50px; border-radius: 30px; width: 450px; transition: 0.4s;
+        }
+        .product-card:hover { transform: scale(1.05); border-color: var(--red); box-shadow: 0 0 50px rgba(255,0,0,0.5); }
+        .product-card h1 { font-size: 80px; margin: 20px 0; }
+
+        /* МОДАЛКИ */
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 2000; justify-content: center; align-items: center; }
+        .overlay.active { display: flex; }
+        .modal { background: #0a0a0a; border: 2px solid #222; padding: 50px 40px; border-radius: 25px; width: 100%; max-width: 600px; text-align: center; }
+        input { width: 100%; padding: 18px; margin: 10px 0; background: #111; border: 2px solid #333; color: white; border-radius: 12px; font-size: 18px; outline: none; }
+        
+        .pay-selector { display: flex; gap: 10px; margin: 20px 0; }
+        .p-opt { flex: 1; padding: 15px; border: 2px solid #333; border-radius: 10px; cursor: pointer; font-weight: bold; color: #666; }
+        .p-opt.active { border-color: var(--red); color: white; background: rgba(255,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<nav>
+    <div class="logo" onclick="move(0)">LYXES<span>OFF</span></div>
+    <div class="nav-right">
+        <div class="nav-links">
+            <a onclick="move(0)">Главная</a>
+            <a onclick="move(1)">Магазин</a>
+            <a onclick="move(2)">Поддержка</a>
+        </div>
+        <div class="social-icons">
+            <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.gg/U9vsYGRw" target="_blank"><i class="fab fa-discord"></i></a>
+        </div>
+    </div>
+</nav>
+
+<div class="main-container" id="slider">
+    <section id="home">
+        <div class="top-info">
+            <div class="info-badge">STATUS: <span style="color:#00ff00;">UNDETECTED</span></div>
+            <div class="info-badge">VERSION: <span style="color:var(--red);">2.0.4</span></div>
+            <div class="info-badge">DOWNLOADS: <span id="count" style="color:var(--red);">122</span></div>
+        </div>
+        <h1 class="hero-title">LYXESOFF <span>SOFTWARE</span></h1>
+        <p style="color: #888; font-size: 26px; margin: 35px 0; max-width: 900px;">Приватный софт для RustMe с мощным функционалом и обходом античита.</p>
+        
+        <div class="btn-group">
+            <button class="btn-main" onclick="move(1)">ПОДРОБНЕЕ</button>
+            <button class="btn-outline" onclick="openModal('downloadModal')">ЛОАДЕР</button>
+        </div>
+    </section>
+
+    <section id="shop">
+        <h2 style="font-size:45px; margin-bottom:50px; text-transform:uppercase;">ВЫБЕРИТЕ <span style="color:var(--red);">ТАРИФ</span></h2>
+        <div style="display:flex; gap:40px;">
+            <div class="product-card">
+                <h3>WEEKLY ACCESS</h3>
+                <h1>299 <small style="font-size:25px; color:#444">RUB</small></h1>
+                <button class="btn-main" style="width:100%;" onclick="openShop('7 Days Access', 299)">КУПИТЬ</button>
+            </div>
+            <div class="product-card">
+                <h3 style="color:var(--red);">MONTHLY ACCESS</h3>
+                <h1>649 <small style="font-size:25px; color:#444">RUB</small></h1>
+                <button class="btn-main" style="width:100%;" onclick="openShop('30 Days Access', 649)">КУПИТЬ</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="support">
+        <div class="modal">
+            <h2 style="color:var(--red); font-size:40px;">ПОДДЕРЖКА</h2>
+            <input type="text" placeholder="Ваш Email">
+            <textarea style="width:100%; height:150px; background:#111; border:2px solid #333; color:white; border-radius:15px; padding:15px; margin:10px 0;" placeholder="Опишите проблему..."></textarea>
+            <button class="btn-main" style="width:100%;">ОТПРАВИТЬ ТИКЕТ</button>
+        </div>
+    </section>
+</div>
+
+<div class="overlay" id="shopModal">
+    <div class="modal">
+        <h2 id="m-tariff" style="color:var(--red);"></h2>
+        <div class="pay-selector">
+            <div class="p-opt active" onclick="setPay('UA Bank', this)">UA CARD (UAH)</div>
+            <div class="p-opt" onclick="setPay('FunPay', this)">FUNPAY (RUB)</div>
+        </div>
+        <input type="email" id="uMail" placeholder="Ваш Email для ключа" oninput="applyPromo()">
+        <input type="text" id="uPromo" placeholder="Промокод" oninput="applyPromo()">
+        <div style="margin:20px 0; font-size:28px; font-weight:900;">ИТОГО: <span id="m-price" style="color:var(--red);"></span></div>
+        <button class="btn-main" id="payBtn" style="width:100%;" disabled onclick="alert('Перенаправление на оплату...')">ОПЛАТИТЬ</button>
+        <button onclick="closeModals()" style="background:none; border:none; color:#444; margin-top:20px; cursor:pointer;">ОТМЕНА</button>
+    </div>
+</div>
+
+<div class="overlay" id="downloadModal">
+    <div class="modal">
+        <h2 style="color:var(--red); font-size:40px;">ЗАГРУЗКА</h2>
+        <a href="https://github.com/lyxesoff/Load/archive/refs/heads/main.zip" class="btn-main" style="display:block; text-decoration:none; margin:30px 0;">СКАЧАТЬ (.ZIP)</a>
+        <p>Пароль от архива: <b style="color:var(--red)">1234</b></p>
+        <button onclick="closeModals()" style="background:none; border:none; color:#444; margin-top:30px; cursor:pointer;">ЗАКРЫТЬ</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    const KURSE = 0.45; // 1 RUB = 0.45 UAH (примерный курс)
+    const PROMOS = {
+        free: ["FREE7-XL92","YoutubeFree3Day","FREE7-KP41","FREE7-RT88","FREE7-MW12","FREE7-BJ39","FREE7-NQ05","FREE7-LX17","FREE7-ZK44","FREE7-HP29","FREE7-VT63","FREE7-RG91","FREE7-DF14","FREE7-LO82","FREE7-XY77","FREE7-QW09","FREE7-AS56","FREE7-ZX34","FREE7-ER45","FREE7-TY67","FREE7-UI89","FREE7-OP12","FREE7-GH34","FREE7-JK56","FREE7-LZ78","FREE7-CV90","FREE7-BN12","FREE7-MK34","FREE7-AQ56","FREE7-SW78","FREE7-DE90","FREE7-FR12","FREE7-GT34","FREE7-HY56","FREE7-JU78","FREE7-KI90","FREE7-LO12","FREE7-MP34","FREE7-NQ56","FREE7-BR78","FREE7-VT90","FREE7-CX12","FREE7-ZA34","FREE7-QS56","FREE7-WD78","FREE7-EF90","FREE7-RG12","FREE7-TH34","FREE7-YJ56","FREE7-UK78","FREE7-IL90"],
+        sale50: ["SALE50-A1B2", "SALE50-C3D4", "SALE50-E5F6", "SALE50-G7H8", "SALE50-I9J0", "SALE50-K1L2", "SALE50-M3N4", "SALE50-O5P6", "SALE50-Q7R8", "SALE50-S9T0", "SALE50-U1V2", "SALE50-W3X4", "SALE50-Y5Z6", "SALE50-B7A8", "SALE50-D9C0", "SALE50-F1E2", "SALE50-H3G4", "SALE50-J5I6", "SALE50-L7K8", "SALE50-N9M0", "SALE50-P1O2", "SALE50-R3Q4", "SALE50-T5S6", "SALE50-V7U8", "SALE50-X9W0", "SALE50-Z1Y2", "SALE50-A3B4", "SALE50-C5D6", "SALE50-E7F8", "SALE50-G9H0", "SALE50-I1J2", "SALE50-K3L4", "SALE50-M5N6", "SALE50-O7P8", "SALE50-Q9R0", "SALE50-S1T2", "SALE50-U3V4", "SALE50-W5X6", "SALE50-Y7Z8", "SALE50-B9A0", "SALE50-D1C2", "SALE50-F3E4", "SALE50-H5G6", "SALE50-J7I8", "SALE50-L9K0", "SALE50-N1M2", "SALE50-P3O4", "SALE50-R5Q6", "SALE50-T7S8", "SALE50-V9U0", "SALE50-X1W2", "SALE50-Z3Y4", "SALE50-A5B6", "SALE50-C7D8", "SALE50-E9F0", "SALE50-G1H2", "SALE50-I3J4", "SALE50-K5L6", "SALE50-M7N8", "SALE50-O9P0", "SALE50-Q1R2", "SALE50-S3T4", "SALE50-U5V6", "SALE50-W7X8", "SALE50-Y9Z0", "SALE50-B1A2", "SALE50-D3C4", "SALE50-F5E6", "SALE50-H7G8", "SALE50-J9I0", "SALE50-L1K2", "SALE50-N3M4", "SALE50-P5O6", "SALE50-R7Q8", "SALE50-T9S0", "SALE50-V1U2", "SALE50-X3W4", "SALE50-Z5Y6", "SALE50-A7B8", "SALE50-C9D0", "SALE50-E1F2", "SALE50-G3H4", "SALE50-I5J6", "SALE50-K7L8", "SALE50-M9N0", "SALE50-O1P2", "SALE50-Q3R4", "SALE50-S5T6", "SALE50-U7V8", "SALE50-W9X0", "SALE50-Y1Z2", "SALE50-B3A4", "SALE50-D5C6", "SALE50-F7E8", "SALE50-H9G0", "SALE50-J1I2", "SALE50-L3K4", "SALE50-N5M6", "SALE50-P7O8", "SALE50-R9Q0"],
+        sale25: ["SALE25-KJ92", "SALE25-HG41", "SALE25-RE88", "SALE25-MT12", "SALE25-BV39", "SALE25-NX05", "SALE25-LZ17", "SALE25-ZP44", "SALE25-HW29", "SALE25-VB63", "SALE25-RN91", "SALE25-DM14", "SALE25-LT82", "SALE25-XY33", "SALE25-QW11", "SALE25-AS22", "SALE25-ZX33", "SALE25-ER44", "SALE25-TY55", "SALE25-UI66", "SALE25-OP77", "SALE25-GH88", "SALE25-JK99", "SALE25-LZ00", "SALE25-CV11", "SALE25-BN22", "SALE25-MK33", "SALE25-AQ44", "SALE25-SW55", "SALE25-DE66", "SALE25-FR77", "SALE25-GT88", "SALE25-HY99", "SALE25-JU00", "SALE25-KI11", "SALE25-LO22", "SALE25-MP33", "SALE25-NQ44", "SALE25-BR55", "SALE25-VT66", "SALE25-CX77", "SALE25-ZA88", "SALE25-QS99", "SALE25-WD00"]
+    };
+
+    let baseRub = 0;
+    let currentMethod = "UA Bank";
+
+    function applyPromo() {
+        const promo = document.getElementById('uPromo').value.trim();
+        const mail = document.getElementById('uMail').value;
+        const tariff = document.getElementById('m-tariff').innerText;
+        let finalRub = baseRub;
+
+        if (PROMOS.free.includes(promo) && tariff.includes("7 Days")) finalRub = 0;
+        else if (PROMOS.sale50.includes(promo)) finalRub = Math.floor(baseRub * 0.5);
+        else if (PROMOS.sale25.includes(promo)) finalRub = Math.floor(baseRub * 0.75);
+
+        if(currentMethod === "UA Bank") {
+            let uah = Math.floor(finalRub * KURSE);
+            document.getElementById('m-price').innerText = uah + " UAH";
+        } else {
+            document.getElementById('m-price').innerText = finalRub + " RUB";
+        }
+        
+        document.getElementById('payBtn').disabled = !mail.includes('@');
+    }
+
+    function openShop(t, p) {
+        baseRub = p;
+        document.getElementById('m-tariff').innerText = t;
+        document.getElementById('uPromo').value = "";
+        applyPromo();
+        openModal('shopModal');
+    }
+
+    function setPay(m, el) {
+        currentMethod = m;
+        document.querySelectorAll('.p-opt').forEach(opt => opt.classList.remove('active'));
+        el.classList.add('active');
+        applyPromo();
+    }
+
+    function move(i) { document.getElementById('slider').style.transform = `translateX(-${i * 100}vw)`; }
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModals() { document.querySelectorAll('.overlay').forEach(o => o.classList.remove('active')); }
+
+    let d = parseInt(localStorage.getItem('lyx_d')) || 122; d += 5; localStorage.setItem('lyx_d', d);
+    document.getElementById('count').innerText = d + "+";
+
+    particlesJS("particles-js", { "particles": { "number": { "value": 50 }, "color": { "value": "#ffffff" }, "opacity": { "value": 0.2 }, "size": { "value": 3 }, "move": { "enable": true, "speed": 1 } } });
+</script>
+</body>
+</html>
